@@ -1,0 +1,10 @@
+.card-section {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.card-section .cardheader-section {
+    background-color: #D70F64;
+    color: white;
+}

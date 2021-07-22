@@ -7,13 +7,11 @@ const Burger = (props) => {
         return amountArr.map(() => {
             return <Ingredients type={item.type} key={Math.random()} />
         })
-    })
-    // .reduce((arr, element) => {
-    //     console.log("Array:", arr, "Element:", element);
-    //     return arr.concat(element);
-    // }, []);
+    }).reduce((arr, element) => {
+        return arr.concat(element);
+    }, []);
 
-    console.log(...ingredientArr);
+    // console.log(ingredientArr);
     if (ingredientArr.length === 0) {
         ingredientArr = <p>Please Add Some Ingredients</p>
     }

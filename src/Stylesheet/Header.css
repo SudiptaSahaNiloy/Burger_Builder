@@ -1,5 +1,7 @@
 .Navigation {
     margin-bottom: 20px;
+    background-color: #D70F64;
+    height: 70px;
 }
 
 .Brand {
@@ -8,13 +10,13 @@
     margin-top: -20px;
 }
 
-.navlink {
+.Navigation .navlink {
     text-decoration: none;
     color: white;
     font-size: 25px;
     margin-top: -25px;
 }
 
-.navlink:hover {
+.Navigation .navlink:hover {
     color: wheat;
 }
