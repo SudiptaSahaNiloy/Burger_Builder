@@ -1,6 +1,7 @@
-import { Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavItem } from 'reactstrap';
 import '../../Stylesheet/Header.css';
 import Logo from '../../assets/Images/logo.png';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
     return (
@@ -11,7 +12,22 @@ const Header = (props) => {
                 </NavbarBrand>
                 <Nav className="me-md-5">
                     <NavItem>
-                        <NavLink href="#" className="navlink">Something</NavLink>
+                        <NavLink
+                            exact
+                            to="/"
+                            className="navlink"
+                            activeStyle={{ color: "wheat", textShadow: "1px 1px gray" }}>
+                            Burger Builder
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            exact
+                            to="/orders"
+                            className="navlink"
+                            activeStyle={{ color: "wheat", textShadow: "1px 1px gray" }}>
+                            Orders
+                        </NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>
