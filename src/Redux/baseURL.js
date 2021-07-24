@@ -1,0 +1,1 @@
+export const baseURL = "https://construct-burger-default-rtdb.asia-southeast1.firebasedatabase.app/orders/"
