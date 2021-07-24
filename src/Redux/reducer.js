@@ -31,6 +31,18 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 totalPrice: state.totalPrice + INGREDIENT_PRICE[action.payload],
             }
 
+        case actionTypes.RESET_INGREDIENT:
+            return {
+                ...state,
+                ingredients: [
+                    { type: 'salad', amount: 0 },
+                    { type: 'cheese', amount: 0 },
+                    { type: 'meat', amount: 0 }
+                ],
+                totalPrice: 80,
+                purchasable: false,
+            }
+
         case actionTypes.REMOVE_INGREDIENT:
             for (let item of ingredients) { //iterates value of array
                 if (item.type === action.payload) {
