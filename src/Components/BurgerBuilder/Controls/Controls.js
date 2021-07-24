@@ -9,6 +9,7 @@ const controls = [
 ];
 
 const Controls = (props) => {
+    console.log(props);
     return (
         <div className="container ms-md-5" style={{ textAlign: "center" }}>
             <Card className="card-section">
