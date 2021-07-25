@@ -29,6 +29,15 @@ const Header = (props) => {
                             Orders
                         </NavLink>
                     </NavItem>
+                    <NavItem>
+                        <NavLink
+                            exact
+                            to="/login"
+                            className="navlink"
+                            activeStyle={{ color: "wheat", textShadow: "1px 1px gray" }}>
+                            Login
+                        </NavLink>
+                    </NavItem>
                 </Nav>
             </Navbar>
         </div>
