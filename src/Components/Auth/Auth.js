@@ -1,7 +1,29 @@
 import { Formik } from 'formik';
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import { auth } from '../../Redux/authActionCreators';
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        auth: (email, password, mode) => dispatch(auth(email, password, mode))
+    }
+}
 
 class Auth extends Component {
+    state = {
+        mode: "Sign Up",
+    }
+
+    switchModeHandler = () => {
+        this.setState({
+            mode: this.state.mode === 'Sign Up' ? "Login" : "Sign Up"
+        })
+    }
+
+    goBack = () => {
+        this.props.history.goBack("/");
+    }
+
     render() {
         return (
             <div>
@@ -14,6 +36,7 @@ class Auth extends Component {
 
                     onSubmit={(values) => {
                         console.log("Values: ", values);
+                        this.props.auth(values.email, values.password, this.state.mode);
                     }}
 
                     validate={(values) => {
@@ -31,10 +54,12 @@ class Auth extends Component {
                             errors.password = "**Must be at least 4 characters!";
                         }
 
-                        if (!values.passwordConfirm) {
-                            errors.passwordConfirm = "**Required";
-                        } else if (values.password !== values.passwordConfirm) {
-                            errors.passwordConfirm = "**Password field doesn't match!"
+                        if (this.state.mode === 'Sign Up') {
+                            if (!values.passwordConfirm) {
+                                errors.passwordConfirm = "**Required";
+                            } else if (values.password !== values.passwordConfirm) {
+                                errors.passwordConfirm = "**Password field doesn't match!"
+                            }
                         }
                         // console.log("Errors: ", errors);
                         return errors;
@@ -43,10 +68,14 @@ class Auth extends Component {
                     {({ values, handleChange, handleSubmit, errors }) => {
                         return (
                             <div style={{
+                                width: "60%",
                                 border: "1px gray solid",
-                                padding: "15px",
+                                padding: "45px",
                                 borderRadius: "7px",
-                            }}>
+                                marginTop: "10rem",
+                                justifyContent: "center",
+                            }} className="mx-auto">
+                                <h1 style={{ textAlign: "center" }}>{this.state.mode === 'Sign Up' ? "Sign Up" : "Login"} Form</h1><br /><br />
                                 <form onSubmit={handleSubmit}>
                                     <input
                                         name="email"
@@ -65,17 +94,28 @@ class Auth extends Component {
                                         value={values.password} />
                                     <span style={{ color: "red" }}>{errors.password}</span>
                                     <br />
-                                    <input
-                                        name="passwordConfirm"
-                                        placeholder="Re-enter Password"
-                                        type="password"
-                                        onChange={handleChange}
-                                        className="form-control"
-                                        value={values.passwordConfirm} />
-                                    <span style={{ color: "red" }}>{errors.passwordConfirm}</span>
-                                    <br />
+                                    {this.state.mode === 'Sign Up' ?
+                                        <div>
+                                            <input
+                                                name="passwordConfirm"
+                                                placeholder="Re-enter Password"
+                                                type="password"
+                                                onChange={handleChange}
+                                                className="form-control"
+                                                value={values.passwordConfirm} />
+                                            <span style={{ color: "red" }}>{errors.passwordConfirm}</span>
+                                            <br />
+                                        </div> : null}
                                     <div className="d-flex justify-content-center">
-                                        <button type="submit" className="btn btn-success">Sign up</button>
+                                        <button style={{
+                                            backgroundColor: "#D70F64",
+                                            color: "white"
+                                        }} type="button" className="btn btn-large me-2" onClick={this.switchModeHandler}>
+                                            Switch to {this.state.mode === "Sign Up" ? "Login" : "Sign Up"}
+                                        </button>
+                                        <button type="submit" className="btn btn-success">
+                                            {this.state.mode === 'Sign Up' ? "Sign Up" : "Login"}
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -87,4 +127,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default connect(null, mapDispatchToProps)(Auth);

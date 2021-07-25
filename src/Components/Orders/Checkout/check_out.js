@@ -78,7 +78,7 @@ class check_out extends Component {
                         if (!values.customer.phone) {
                             errors.phone = "**Required";
                         } else if (!/(^(\+8801|8801|01|008801))[1|3-9]{1}(\d){8}$/.test(values.customer.phone)) {
-                            errors.password = "**Use Valid Phone number";
+                            errors.phone = "**Use Valid Phone number";
                         }
 
                         return errors;
