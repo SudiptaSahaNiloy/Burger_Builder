@@ -11,6 +11,8 @@ const mapStateToProps = (state) => {
         ingredients: state.ingredients,
         totalPrice: state.totalPrice,
         purchasable: state.purchasable,
+        userId: state.userId,
+        token: state.token,
     }
 }
 
@@ -45,10 +47,13 @@ class check_out extends Component {
                             ingredients: this.props.ingredients,
                             customer: values.customer,
                             price: this.props.totalPrice,
-                            orderTime: new Date()
+                            orderTime: new Date(),
+                            userId: this.props.userId,
                         }
 
-                        axios.post('https://construct-burger-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json', order)
+                        console.log(order);
+
+                        axios.post('https://construct-burger-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json?auth=' + this.props.token, order)
                             .then(response => {
                                 if (response.status === 200) {
                                     values.isLoading = false;

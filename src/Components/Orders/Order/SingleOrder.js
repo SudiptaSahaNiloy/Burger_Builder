@@ -1,16 +1,18 @@
 import axios from "axios"
 import { Component } from "react";
+import { connect } from "react-redux";
 import { Button } from "reactstrap"
 import { baseURL } from "../../../Redux/baseURL";
 
-class singleOrder extends Component {
-    componentDidCatch() {
-        console.log(this.props);
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
     }
+}
 
+class singleOrder extends Component {
     deleteOrder = () => {
-        // console.log(baseURL.concat(this.props.order.id));
-        axios.delete(baseURL.concat(`${this.props.order.id}.json`))
+        axios.delete(baseURL.concat(`${this.props.order.id}.json?auth=` + this.props.token))
             .then(response => {
                 window.location.reload();
             })
@@ -51,4 +53,4 @@ class singleOrder extends Component {
 
 }
 
-export default singleOrder;
+export default connect(mapStateToProps)(singleOrder);

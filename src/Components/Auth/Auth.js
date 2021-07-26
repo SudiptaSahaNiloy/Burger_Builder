@@ -1,11 +1,20 @@
 import { Formik } from 'formik';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { Alert } from 'reactstrap';
 import { auth } from '../../Redux/authActionCreators';
+import Spinner from '../Spinner/Spinner';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        auth: (email, password, mode) => dispatch(auth(email, password, mode))
+        auth: (email, password, mode) => dispatch(auth(email, password, mode)),
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        authLoading: state.authLoading,
+        authFailedMsg: state.authFailedMsg,
     }
 }
 
@@ -25,8 +34,18 @@ class Auth extends Component {
     }
 
     render() {
-        return (
-            <div>
+        let error = null;
+
+        if (this.props.authFailedMsg != null) {
+            error = (<Alert color="danger">{this.props.authFailedMsg}</Alert>);
+        }
+
+        let form = null;
+
+        if (this.props.authLoading) {
+            form = <Spinner />
+        } else {
+            form = (
                 <Formik
                     initialValues={{
                         email: "",
@@ -71,7 +90,7 @@ class Auth extends Component {
                                 border: "1px gray solid",
                                 padding: "45px",
                                 borderRadius: "7px",
-                                marginTop: "10rem",
+                                marginTop: "2rem",
                                 justifyContent: "center",
                             }} className="mx-auto">
                                 <h1 style={{ textAlign: "center" }}>{this.state.mode === 'Sign Up' ? "Sign Up" : "Login"} Form</h1><br /><br />
@@ -121,9 +140,15 @@ class Auth extends Component {
                         )
                     }}
                 </Formik>
+            )
+        }
+        return (
+            <div>
+                {error}
+                {form}
             </div>
         )
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
