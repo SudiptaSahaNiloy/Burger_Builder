@@ -35,7 +35,6 @@ class Auth extends Component {
                     }}
 
                     onSubmit={(values) => {
-                        console.log("Values: ", values);
                         this.props.auth(values.email, values.password, this.state.mode);
                     }}
 
