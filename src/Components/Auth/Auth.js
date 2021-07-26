@@ -86,7 +86,7 @@ class Auth extends Component {
                     {({ values, handleChange, handleSubmit, errors }) => {
                         return (
                             <div style={{
-                                width: "60%",
+                                width: "100%",
                                 border: "1px gray solid",
                                 padding: "45px",
                                 borderRadius: "7px",

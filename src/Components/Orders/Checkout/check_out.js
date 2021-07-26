@@ -51,8 +51,6 @@ class check_out extends Component {
                             userId: this.props.userId,
                         }
 
-                        console.log(order);
-
                         axios.post('https://construct-burger-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json?auth=' + this.props.token, order)
                             .then(response => {
                                 if (response.status === 200) {

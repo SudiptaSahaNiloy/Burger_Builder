@@ -30,7 +30,7 @@ const Header = (props) => {
         )
     } else {
         links = (
-            <Nav className="me-md-5">
+            <Nav className="me-md-5 nav">
                 <NavItem>
                     <NavLink
                         exact
