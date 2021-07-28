@@ -1,7 +1,6 @@
 import Header from "./Header/Header";
 import BurgerBuilder from "./BurgerBuilder/BurgerBuilder";
 import Orders from "./Orders/Orders";
-// import Checkout from "./Orders/Checkout/Checkout";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Auth from "./Auth/Auth";
 import check_out from "./Orders/Checkout/check_out";
